@@ -1,4 +1,4 @@
-use url::{ParseError, Url};
+use url::{ParseError, Position, Url};
 
 fn main() {
     /************************
@@ -55,4 +55,12 @@ fn main() {
     println!("{}", url.scheme());
     println!("{}", url.host_str().unwrap());
     println!("{}", url.port().unwrap_or_default());
+
+    /***********
+     * CLEAN URL
+     ***********/
+    let url =
+        Url::parse("https://github.com/rust-lang/rust/issues?labels=E-easy&state=open").unwrap();
+    let cleaned: &str = &url[..Position::AfterPath];
+    println!("{}", cleaned);
 }
