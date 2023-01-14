@@ -29,4 +29,19 @@ fn main() {
     let url = Url::parse("https://archive.org/download/chroniclesofcoun00grif/").unwrap();
     let base = base_url(url);
     println!("{}", base);
+
+    /*************************
+     * BUILD A URL FROM A BASE
+     *************************/
+
+    fn build_url(base: Url, path: &str) -> Result<Url, ParseError> {
+        let mut url = base;
+        url.set_path(path);
+        Ok(url)
+    }
+
+    let base = Url::parse("https://archive.org").unwrap();
+    let path = "/download/falloffeudalismi1904davi/falloffeudalismi1904davi.pdf";
+    let new_url = build_url(base, path).unwrap();
+    println!("{}", new_url);
 }
